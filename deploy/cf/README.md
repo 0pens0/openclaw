@@ -11,6 +11,14 @@ Deploy OpenClaw as an app in a Space on Tanzu Application Service (TAS). The pla
 
 ## Steps
 
+**Option: run the deploy script** (build, push image, cf push) from repo root:
+
+```bash
+./deploy/cf/deploy-docker.sh
+```
+
+Or do it step by step:
+
 1. **Build and push the Docker image** from this repo (e.g. from your fork):
 
    ```bash
