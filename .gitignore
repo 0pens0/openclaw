@@ -71,3 +71,6 @@ USER.md
 
 # local tooling
 .serena/
+
+# Deployment secrets (vars file here is optional; prefer ~/.openclaw/.env)
+deploy/secrets/

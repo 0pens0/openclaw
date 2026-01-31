@@ -1,0 +1,21 @@
+# Tanzu Application Service (TAS) / Cloud Foundry app manifest for OpenClaw
+# See deploy/cf/README.md for steps. Platform runs in a closed home lab; use a
+# public route and Tailscale subnet router for access (see deploy/tailscale/).
+
+applications:
+  - name: openclaw
+    docker:
+      image: YOUR_REGISTRY/openclaw:latest
+    command: node dist/index.js gateway --allow-unconfigured --port 8080 --bind 0.0.0.0
+    env:
+      NODE_ENV: production
+      OPENCLAW_STATE_DIR: /home/vcap/data
+      # OPENCLAW_GATEWAY_TOKEN: set via cf set-env or user-provided service (do not commit)
+    memory: 1G
+    disk_quota: 1G
+    health-check-type: http
+    health-check-http-endpoint: /health
+    # Map a public route (platform is in closed home lab; Tailscale gives access)
+    # routes: use cf map-route after push, e.g. cf map-route openclaw apps.YOUR-DOMAIN --hostname openclaw
+    # Volume service (if available): create and bind so OPENCLAW_STATE_DIR persists
+    # services: [openclaw-data]
